@@ -1,0 +1,71 @@
+/*查询面板样式*/
+.query-form-container, .edit-form-container{
+    max-width: 900px;
+    margin-top: 10px;
+    display: none;
+}
+.query-form-container form, .edit-form-container form{
+    margin-bottom: 0;
+}
+.query-form-container .form-actions, .edit-form-container .form-actions{
+    text-align: center;
+    border: none;
+    padding: 0;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+.query-form-container label,.edit-form-container label{
+    display: inline-block;
+    margin-right:10px;
+    width: 45%;
+}
+.query-form-container label input, .edit-form-container label input{
+    width:100%;
+}
+.query-form-container .item-name, .item-control, .edit-form-container .item-name{
+    display: inline-block;
+    width: 45%;
+}
+.query-form-container .item-name, .edit-form-container .item-name{
+    text-align: right;
+    padding: 5px 8px;
+}
+.query-form-container .item-control, .edit-form-container .item-contro{
+    text-align: left;
+}
+thead th,.center{
+    text-align: center !important;
+}
+
+/*分页样式*/
+.pagination {
+    font-size: 12px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.pagination a {
+    text-decoration: none;
+    border: 1px solid #dddddd;
+    color: #15B;
+}
+
+.pagination a, .pagination span {
+    display: block;
+    float: left;
+    padding: 0.3em 0.5em;
+    margin-right: 2px;
+    margin-bottom: 5px;
+}
+
+.pagination .current {
+    background: #26B;
+    color: #fff;
+    border: solid 1px #AAE;
+}
+
+.pagination .current.prev, .pagination .current.next{
+    color:#999;
+    border-color:#999;
+    background:#fff;
+}

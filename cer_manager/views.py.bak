@@ -1,0 +1,21 @@
+from django.template import loader,Context  
+from django.http import HttpResponse
+from cer_manager import DbCertificate
+import MySQLdb
+
+def index(request):  
+        posts = blog.objects.all()  
+        t = loader.get_template("index.html")  
+        c = Context({'posts':posts})  
+        return HttpResponse(t.render(c))
+
+class show_cer(request,id):
+	def __init__(self):
+		self.mysql_host = "172.27.34.126"
+		self.mysql_uer = "root"
+		self.mysql_passwd = "mqq2005"
+		self.mysql_db = "cer_manager"
+		self.connt = MySQLdb.connect(user = self.mysql_user, passwd = self.mysql_passwd, host = self.mysql_host,db = self.mysql_db)
+		self.cursor = self.conn.cursor()
+
+
