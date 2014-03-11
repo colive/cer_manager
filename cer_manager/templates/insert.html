@@ -30,8 +30,51 @@
         <li class="active">编辑证书/添加证书</li>
     </ul>
     <div class="inner">
-        <form class="form-horizontal" action="http://node.server.com/cert/insert?id=<%=id%>" method="post" id="form1">
+        <form class="form-horizontal" action="http://node.server.com/cert/insert?id=<%=id%>" method="post" id="form1">{% csrf_token %}
+            {% for cer.info in form %}
+            {% if cer.info.errors %}
+            {% if cer.info.label == '生效时间' or cer.info.label == '过期时间'%}
             <div class="control-group">
+                <label class="control-label">{{cer.info.label}}</label>
+                <div class="controls">
+                    <input type="text" name="{{}cer.info.name}" value=""  required="true" class="Wdate">
+                    <div class="alert alert-info">
+                        参考格式：Apr 27 11:20:30 2013 GMT
+                    </div>
+                </div>
+            </div>
+            {% elif cer.info.label == '负责人' or cer.info.label == '关注人' %}
+             <div class="control-group">
+                <label class="control-label">{{ cer.info.label }}</label>
+                <div class="controls">
+                    <input type="text" name="{{cer.info.name}}" value=""  required="true">
+                    <div class="alert alert-info">
+                        多个关注人请使用半角分号;分隔
+                    </div>
+                </div>
+            </div>           
+            {% elif cer.info.label == "告警状态" %}
+            <div class="control-group" style="display: none">
+                <label class="control-label">{{cer.info.label}}<span class="star">*</span></label>
+                <div class="controls">
+                    <select name="{{cer.info.name}}" id="">
+                        <option value="Y" selected>Yes</option>
+                        <option value="N">No</option>
+                    </select>
+                </div>
+            </div>
+            {% else %}
+            <div class="control-group">
+                <label class="control-label">{{cer.info.label}}<span class="star">*</span></label>
+                <div class="controls">
+                    <input type="text" name="{{cer.info.name}}" value=""  required="true" maxlength="60">
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+
+            <!--div class="control-group">
                 <label class="control-label">证书名称<span class="star">*</span></label>
                 <div class="controls">
                     <input type="text" name="name" value=""  required="true" maxlength="60">
@@ -105,7 +148,7 @@
                         多个关注人请使用半角分号;分隔
                     </div>
                 </div>
-            </div>
+            </div-->
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary" id="btn_save">保存修改</button>
                 <button type="button" class="btn" onclick="history.go(-1)">返回</button>
