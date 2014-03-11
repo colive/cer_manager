@@ -1,7 +1,7 @@
 from django import newforms as forms
 
 class ContactForm(forms.Form):
-	证书名称 = forms.CharField(required=True)
+	name = forms.CharField(required=True)
     证书路径 = forms.CharField(required=True)
     Server = forms.CharField(required=True)
     MD5 = forms.CharField(required=True)
@@ -12,5 +12,5 @@ class ContactForm(forms.Form):
     关注人 = forms.CharField(required=True)
     模块ID = forms.IntegerField(required=True)
     def clean_info(self):
-        name = self.cleaned_data['证书名称']
+        name = self.cleaned_data['证书名称']	
         return message
