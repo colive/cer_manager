@@ -6,7 +6,7 @@
     <title>添加证书</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
-    <link rel="stylesheet" href="<%=RES_PATH%>/static/css/base.css">
+    <%--<link rel="stylesheet" href="<%=RES_PATH%>/static/css/base.css">--%>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/sea.js"></script>
     <script src="/js/base.js"></script>
@@ -27,36 +27,38 @@
         <li>
             <a href="index.html">证书列表</a><span class="divider">/</span>
         </li>
-        <li class="active">添加证书</li>
+        <li class="active">编辑证书/添加证书</li>
     </ul>
     <div class="inner">
         <form class="form-horizontal" action="http://node.server.com/cert/insert?id=<%=id%>" method="post" id="form1">{% csrf_token %}
-            {% for cer in form %}
-            {% if cer.label == '生效时间' or cer.label == '过期时间' %}
+            {% for cer.info in form %}
+           <p> {{ cer.info.name}}</p>
+            {% if cer.info.errors %}
+            {% if cer.info.label == '生效时间' or cer.info.label == '过期时间'%}
             <div class="control-group">
-                <label class="control-label">{{cer.label}}</label>
+                <label class="control-label">{{cer.info.label}}</label>
                 <div class="controls">
-                    <input type="text" name="{{ cer.name }}" value=""  required="true" class="Wdate">
+                    <input type="text" name="{{}cer.info.name}" value=""  required="true" class="Wdate">
                     <div class="alert alert-info">
                         参考格式：Apr 27 11:20:30 2013 GMT
                     </div>
                 </div>
             </div>
-            {% elif cer.label == '负责人' or cer.label == '关注人' %}
+            {% elif cer.info.label == '负责人' or cer.info.label == '关注人' %}
              <div class="control-group">
-                <label class="control-label">{{ cer.label }}</label>
+                <label class="control-label">{{ cer.info.label }}</label>
                 <div class="controls">
-                    <input type="text" name="{{ cer.name }}" value=""  required="true">
+                    <input type="text" name="{{cer.info.name}}" value=""  required="true">
                     <div class="alert alert-info">
                         多个关注人请使用半角分号;分隔
                     </div>
                 </div>
             </div>           
-            {% elif cer.label == "告警状态" %}
+            {% elif cer.info.label == "告警状态" %}
             <div class="control-group" style="display: none">
-                <label class="control-label">{{cer.label}}<span class="star">*</span></label>
+                <label class="control-label">{{cer.info.label}}<span class="star">*</span></label>
                 <div class="controls">
-                    <select name="{{cer.name}}" id="">
+                    <select name="{{cer.info.name}}" id="">
                         <option value="Y" selected>Yes</option>
                         <option value="N">No</option>
                     </select>
@@ -64,11 +66,12 @@
             </div>
             {% else %}
             <div class="control-group">
-                <label class="control-label">{{cer.label}}<span class="star">*</span></label>
+                <label class="control-label">{{cer.info.label}}<span class="star">*</span></label>
                 <div class="controls">
-                    <input type="text" name="{{cer.name}}" value=""  required="true" maxlength="60">
+                    <input type="text" name="{{cer.info.name}}" value=""  required="true" maxlength="60">
                 </div>
             </div>
+            {% endif %}
             {% endif %}
             {% endfor %}
 
